@@ -111,6 +111,12 @@ class Config(object):
     def get_quality(self):
         return self._data['base']['quality']
 
+    def get_datetime_format(self):
+        return self._data['base']['datetime_format']
+
+    def get_date_format(self):
+        return self._data['base']['date_format']
+
     def get_alternative_font(self):
         return ImageFont.truetype(self._data['base']['alternative_font'], self.get_font_size())
 

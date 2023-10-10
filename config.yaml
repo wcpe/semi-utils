@@ -8,6 +8,8 @@ base:
   input_dir: ./input
   output_dir: ./output
   quality: 100
+  datetime_format: '%Y-%m-%d %H:%M'
+  date_format: '%Y-%m-%d'
 global:
   focal_length:
     use_equivalent_focal_length: false

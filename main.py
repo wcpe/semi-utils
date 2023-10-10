@@ -51,7 +51,7 @@ def processing():
 
     for source_path in tqdm(file_list):
         # 打开图片
-        container = ImageContainer(source_path)
+        container = ImageContainer(source_path, config)
 
         # 使用等效焦距
         container.is_use_equivalent_focal_length(config.use_equivalent_focal_length())

@@ -8,7 +8,7 @@ from PIL import Image
 from PIL.Image import Transpose
 from dateutil import parser
 
-from entity.config import ElementConfig
+from entity.config import Config, ElementConfig
 from enums.constant import *
 from utils import calculate_pixel_count
 from utils import extract_attribute
@@ -67,8 +67,9 @@ def get_focal_length(exif):
 
 
 class ImageContainer(object):
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, config: Config):
         self.path: Path = path
+        self.config: Config = config
         self.target_path: Path | None = None
         self.img: Image.Image = Image.open(path)
         self.exif: dict = get_exif(path)
@@ -155,14 +156,14 @@ class ImageContainer(object):
         解析日期，转换为指定的格式
         :return: 指定格式的日期字符串，转换失败返回原始的时间字符串
         """
-        return datetime.strftime(self.date, '%Y-%m-%d %H:%M')
+        return datetime.strftime(self.date, self.config.get_datetime_format())
 
     def _parse_date(self) -> str:
         """
         解析日期，转换为指定的格式
         :return: 指定格式的日期字符串，转换失败返回原始的时间字符串
         """
-        return datetime.strftime(self.date, '%Y-%m-%d')
+        return datetime.strftime(self.date, self.config.get_date_format())
 
     def get_attribute_str(self, element: ElementConfig) -> str:
         """
